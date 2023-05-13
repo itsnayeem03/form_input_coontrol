@@ -1,0 +1,94 @@
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Get values in form</title>
+            <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+
+            <style>
+                @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap');
+                body{
+                    font-family: 'Lato', sans-serif;
+                    background: #4A4E69;
+                }
+            </style>
+        </head>
+        <body>
+            
+        <div class="container my-5">
+
+            <div class="card mx-auto shadow-lg">
+
+                <div class="card-header">
+                    <h1 class="text-center">Creat an Account:</h1>
+                </div>
+
+                <div class="card-body">
+
+                    <form action="" id="form_user">
+                    <div class="msg w-100 my-1"></div>
+
+                        <label for=""> Name</label>
+                        <input type="text" name="name" class="form-control my-3">
+
+                        <label for="">Email</label>
+                        <input type="text" name="email" class="form-control my-3">
+
+                        <label for="">New Password</label>
+                        <input type="text" name="password" class="form-control my-3">
+
+                        <button type="reset" class="btn btn-outline-secondary my-2 d-block w-100">Reset All</button>
+
+                        <button type="submit" class="form-control btn btn-primary ">Creat Account</button>
+                    </form>
+
+                </div>
+
+            </div>
+            
+        </div>
+            <script>
+                const formUser = document.getElementById('form_user');
+                const userName = formUser.querySelector('input[name="name"]');
+                const emailAdd = formUser.querySelector('input[name="email"]');
+                const passwordP = formUser.querySelector('input[name="password"]');
+                const msg = formUser.querySelector('.msg')
+
+                formUser.onsubmit = (e) =>{
+                e.preventDefault() 
+
+
+            if(userName.value == '' || emailAdd.value == '' || passwordP.value == ''){
+                msg.innerHTML= setAlert('All fields are required');
+            }else if(chakeEmail(emailAdd.value) == false){
+                msg.innerHTML = setAlert('Inavlid Email Address','warning');
+            }else if(chakePassword(passwordP.value) == false){
+                msg.innerHTML = setAlert('use minimum 6 chareckters as a password','warning');
+             }else{
+                msg.innerHTML = setAlert('Perfectly Done','success');
+                }
+
+                }
+
+        //Functions=====
+
+                const  setAlert = (msg, type="danger") =>{
+                    return `<p class = "alert alert-${type} d-flex justify-content-between">${msg} <button data-bs-dismiss="alert" class="btn-close"></button></p>`
+                    };
+
+                const chakeEmail = (email) =>{
+                    let patternEmail =/^[a-z0-9_\.]{1,}@[a-z0-9]{1,9}\.[a-z]{1,4}$/;
+                    return patternEmail.test(email);
+                    };
+
+                const chakePassword = (password) =>{
+                    let patternPassword = /[a-zA-Z0-9\.\*_@!#$%&]{6,}/;
+                    return patternPassword.test(password);
+                }    
+            </script>
+                <script src="./assets/JS/bootstrap.bundle.min.js"></script>
+        </body>
+        </html>
+
